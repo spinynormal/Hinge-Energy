@@ -1,6 +1,35 @@
-#pragma once
+
+//Normale Covariance Matrix___________________________________________________________________________________
 
 
+int h = pointhedge(0, @ptnum);
+
+
+matrix3 test = 0; 
+do{
+	
+   int prev = hedge_prev(0,h);  int pt0 = hedge_srcpoint(0, h);   int pt1 = hedge_dstpoint(0, h);  int pt2 = hedge_srcpoint(0, prev);
+         
+     vector a = normalize (point( 0 , "P" , hedge_srcpoint(0, h)));
+     vector b = normalize (point( 0 , "P" , hedge_dstpoint(0, h))); 
+     vector c = normalize (point( 0 , "P" , hedge_srcpoint(0, prev))); 
+	
+     vector xy = b-a;  vector zy = c-a;
+     vector normal = prim( 0 , "normale", hedge_prim( 0, h)); 
+	
+     float cross = length( cross( xy, zy)); 
+     float doat = dot( xy, zy); 
+         
+     float angle = atan2( cross,doat); 
+     3@test += angle * outerproduct( normal , normal); 
+         
+  h = pointhedgenext(0, h);
+	
+ }while(h != -1);
+
+
+//Appendix B in the Paper 
+//Gradient_______________________________________________________________________________________________
 
 //__________________________________________________Helper
 vector hedge2(int h) {
@@ -122,32 +151,5 @@ void grad(int ptnum; vector eigenvector) {
 
 }
 
-
 vector Eigenvector = point(0, "utvector1", @ptnum);
-
 grad(@ptnum, Eigenvector);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
