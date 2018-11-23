@@ -1,6 +1,5 @@
 
-//Normale Covariance Matrix___________________________________________________________________________________
-
+//3 × 3 normal covariance matrix___________________________________________________________________________________
 
 int h = pointhedge(0, @ptnum);
 
@@ -28,8 +27,11 @@ do{
  }while(h != -1);
 
 
-//Appendix B in the Paper 
+
 //Gradient_______________________________________________________________________________________________
+//Appendix B in the Paper 
+
+
 
 //__________________________________________________Helper
 vector hedge2(int h) {
@@ -52,13 +54,12 @@ void tas(vector normal; float area; int primnum) {
 
 }
 
-
 vector hedge(int h; int h2) {
 	vector a = point(0, "P", h);
 	vector b = point(0, "P", h2);
 	return a - b;
 }
-//____________________________________________________FuncDeriative
+//____________________________________________________FuncDerivative
 
 function vector[] Gradient_InteriorAngle(vector N;   int pt0, pt1, pt2) {
 	vector holder[];
